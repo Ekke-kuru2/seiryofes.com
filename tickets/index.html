@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>チケット</title>
+    <script src="../jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <script src="../qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/keen-slider@6.5.0/keen-slider.min.css"/>
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="./tickets.css" />
+    <script>
+   </script>
+    <script src="tickets.js"></script>
+</head>
+<body>
+
+<div id="header">
+    <h1>seiryofes.com</h1>
+    <div id="nav_menu">
+        
+    </div>
+</div>
+<div id="main">
+  
+  <h2 class="title">チケット一覧</h2>
+  <div class="button_holder"><a href="#" class="button"><ion-icon name="add-circle-outline"></ion-icon>チケットを探す</a></div>
+  
+<div id="tickets_view">
+<div id="my-keen-slider" class="keen-slider">
+    <div class="keen-slider__slide ticket_holder t0">
+      <div class="ticket">
+      <div class="ticket_context">
+      <div class="qr"></div>
+      <h3>一度死んでみた</h3>
+      <p>18R</p>
+      <p>9/23 10:00~11:00</p>
+      <p>@18R</p>
+      </div>
+      </div>
+    </div>
+
+    <div class="keen-slider__slide ticket_holder t1">
+      <div class="ticket">
+        <div class="ticket_context">
+        <div class="qr"></div>
+        <h3>一度死んでみた</h3>
+        <p>18R</p>
+        <p>9/23 10:00~11:00</p>
+        <p>@18R</p>
+        </div>
+        </div>
+    </div>
+    <div class="keen-slider__slide ticket_holder t2">
+      <div class="ticket">
+        <div class="ticket_context">
+        <div class="qr"></div>
+        <h3>一度死んでみた</h3>
+        <p>18R</p>
+        <p>9/23 10:00~11:00</p>
+        <p>@18R</p>
+        </div>
+        </div>
+    </div>
+
+
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/keen-slider@6.5.0/keen-slider.min.js"></script>
+  <script>function navigation(slider) {
+    let wrapper, dots, arrowLeft, arrowRight
+  
+    function markup(remove) {
+      wrapperMarkup(remove)
+      dotMarkup(remove)
+      arrowMarkup(remove)
+    }
+  
+    function removeElement(elment) {
+      elment.parentNode.removeChild(elment)
+    }
+    function createDiv(className) {
+      var div = document.createElement("div")
+      var classNames = className.split(" ")
+      classNames.forEach((name) => div.classList.add(name))
+      return div
+    }
+  
+    function arrowMarkup(remove) {
+      if (remove) {
+        removeElement(arrowLeft)
+        removeElement(arrowRight)
+        return
+      }
+      arrowLeft = createDiv("arrow arrow--left")
+      arrowLeft.addEventListener("click", () => slider.prev())
+      arrowRight = createDiv("arrow arrow--right")
+      arrowRight.addEventListener("click", () => slider.next())
+  
+      wrapper.appendChild(arrowLeft)
+      wrapper.appendChild(arrowRight)
+    }
+  
+    function wrapperMarkup(remove) {
+      if (remove) {
+        var parent = wrapper.parentNode
+        while (wrapper.firstChild)
+          parent.insertBefore(wrapper.firstChild, wrapper)
+        removeElement(wrapper)
+        return
+      }
+      wrapper = createDiv("navigation-wrapper")
+      slider.container.parentNode.appendChild(wrapper)
+      wrapper.appendChild(slider.container)
+    }
+  
+    function dotMarkup(remove) {
+      if (remove) {
+        removeElement(dots)
+        return
+      }
+      dots = createDiv("dots")
+      slider.track.details.slides.forEach((_e, idx) => {
+        var dot = createDiv("dot")
+        dot.addEventListener("click", () => slider.moveToIdx(idx))
+        dots.appendChild(dot)
+      })
+      wrapper.appendChild(dots)
+    }
+  
+    function updateClasses() {
+      var slide = slider.track.details.rel
+      slide === 0
+        ? arrowLeft.classList.add("arrow--disabled")
+        : arrowLeft.classList.remove("arrow--disabled")
+      slide === slider.track.details.slides.length - 1
+        ? arrowRight.classList.add("arrow--disabled")
+        : arrowRight.classList.remove("arrow--disabled")
+      Array.from(dots.children).forEach(function (dot, idx) {
+        idx === slide
+          ? dot.classList.add("dot--active")
+          : dot.classList.remove("dot--active")
+      })
+    }
+  
+    slider.on("created", () => {
+      markup()
+      updateClasses()
+    })
+    slider.on("optionsChanged", () => {
+      console.log(2)
+      markup(true)
+      markup()
+      updateClasses()
+    })
+    slider.on("slideChanged", () => {
+      updateClasses()
+    })
+    slider.on("destroyed", () => {
+      markup(true)
+    })
+  }
+  
+  var slider = new KeenSlider("#my-keen-slider", {}, [navigation])</script>
+</div>
+</div>
+
+</div>
+
+<div id="footer_holder">
+</div>
+
+</body>
+</html>
